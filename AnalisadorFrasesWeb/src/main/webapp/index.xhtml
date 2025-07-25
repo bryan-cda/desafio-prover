@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Analisador de Frases</title>
+</h:head>
+<h:body>
+    <h:form id="formFrase">
+        <p:panel header="Analisador de Frase">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Digite a frase:" for="frase" />
+                <p:inputTextarea id="frase" value="#{fraseBean.frase}" rows="4" cols="50" autoResize="false" />
+            </h:panelGrid>
+
+            <p:commandButton value="Analisar" action="#{fraseBean.analisar}" update="resultadoPanel" />
+
+            <p:panel id="resultadoPanel" header="Resultado" rendered="#{not empty fraseBean.resultado}">
+                <h:outputText value="Palavras distintas: #{fraseBean.totalPalavrasDistintas}" />
+                <p:dataTable value="#{fraseBean.resultado.entrySet()}" var="entry">
+                    <p:column headerText="Palavra">
+                        <h:outputText value="#{entry.key}" />
+                    </p:column>
+                    <p:column headerText="Ocorrências">
+                        <h:outputText value="#{entry.value}" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
