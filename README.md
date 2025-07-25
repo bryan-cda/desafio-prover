@@ -90,7 +90,7 @@ mvn test
 Os testes encontram-se na classe:
 
 ```
-src/test/java/br/com/prover/analisador/FraseBeanTest.java
+src/test/java/br/com/prover/analisador/test/FraseBeanTest.java
 ```
 
 ---
