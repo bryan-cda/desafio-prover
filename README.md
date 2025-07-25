@@ -140,7 +140,7 @@ AnalisadorFrasesWeb/
 
 ## 👨‍💻 Autor
 
-Carlos Lemos
+Bryan DUarte
 
 ---
 
