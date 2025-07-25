@@ -25,7 +25,7 @@ Você pode executar a aplicação de duas formas:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/AnalisadorFrasesWeb.git
+git clone git@github.com:bryan-cda/desafio-prover.git
 cd AnalisadorFrasesWeb
 
 # Compile o projeto
@@ -60,7 +60,7 @@ http://localhost:8080/AnalisadorFrasesWeb-1.0-SNAPSHOT/
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/AnalisadorFrasesWeb.git
+git clone git@github.com:bryan-cda/desafio-prover.git
 cd AnalisadorFrasesWeb
 
 # Compile o projeto
