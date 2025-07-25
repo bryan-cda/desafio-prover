@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
     <title>Analisador de Frases</title>
 </h:head>
 <h:body>
-    <h:form id="formFrase">
-        <p:panel header="Analisador de Frase">
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Digite a frase:" for="frase" />
-                <p:inputTextarea id="frase" value="#{fraseBean.frase}" rows="4" cols="50" autoResize="false" />
-            </h:panelGrid>
+    <h:form>
+        <h2>Digite a frase</h2>
+        <h:inputText value="#{fraseBean.frase}" size="60" />
+        <h:commandButton value="Analisar" action="#{fraseBean.analisar}" />
 
-            <p:commandButton value="Analisar" action="#{fraseBean.analisar}" update="resultadoPanel" />
-
-            <p:panel id="resultadoPanel" header="Resultado" rendered="#{not empty fraseBean.resultado}">
-                <h:outputText value="Palavras distintas: #{fraseBean.totalPalavrasDistintas}" />
-                <p:dataTable value="#{fraseBean.resultado.entrySet()}" var="entry">
-                    <p:column headerText="Palavra">
-                        <h:outputText value="#{entry.key}" />
-                    </p:column>
-                    <p:column headerText="Ocorrências">
-                        <h:outputText value="#{entry.value}" />
-                    </p:column>
-                </p:dataTable>
-            </p:panel>
-        </p:panel>
+        <h:panelGroup rendered="#{not empty fraseBean.contagemPalavras}">
+            <h3>Resultado:</h3>
+            <h:outputText value="Quantidade de palavras distintas: #{fraseBean.contagemPalavras.size()}" />
+            <br/><br/>
+            <h:dataTable value="#{fraseBean.contagemPalavras.entrySet()}" var="entry">
+                <h:column>
+                    <f:facet name="header">Palavra</f:facet>
+                    #{entry.key}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Ocorrências</f:facet>
+                    #{entry.value}
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
     </h:form>
 </h:body>
 </html>

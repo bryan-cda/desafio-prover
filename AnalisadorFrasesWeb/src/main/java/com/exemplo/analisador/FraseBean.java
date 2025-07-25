@@ -1,38 +1,44 @@
 package com.exemplo.analisador;
 
-import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 import java.io.Serializable;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-@Named
+@Named("fraseBean")
 @ViewScoped
 public class FraseBean implements Serializable {
 
     private String frase;
-    private Map<String, Integer> resultado;
-    private int totalPalavrasDistintas;
+    private Map<String, Integer> contagemPalavras;
 
     public void analisar() {
-        if (frase == null || frase.trim().isEmpty()) {
-            resultado = Collections.emptyMap();
-            totalPalavrasDistintas = 0;
-            return;
+        System.out.println("Frase recebida: " + frase);
+
+        contagemPalavras = new LinkedHashMap<>();
+
+        if (frase != null && !frase.trim().isEmpty()) {
+            String[] palavras = frase.toLowerCase().split("\\s+");
+
+            for (String palavra : palavras) {
+                palavra = palavra.replaceAll("[^\\p{L}0-9]", ""); // Remove pontuação
+                if (!palavra.isEmpty()) {
+                    contagemPalavras.put(palavra, contagemPalavras.getOrDefault(palavra, 0) + 1);
+                }
+            }
         }
-
-        Map<String, Integer> contador = new LinkedHashMap<>();
-        String[] palavras = frase.toLowerCase().replaceAll("[^\\p{L}\\p{Nd}]+", " ").split("\\s+");
-
-        for (String palavra : palavras) {
-            contador.put(palavra, contador.getOrDefault(palavra, 0) + 1);
-        }
-
-        this.resultado = contador;
-        this.totalPalavrasDistintas = contador.size();
     }
 
-    public String getFrase() { return frase; }
-    public void setFrase(String frase) { this.frase = frase; }
-    public Map<String, Integer> getResultado() { return resultado; }
-    public int getTotalPalavrasDistintas() { return totalPalavrasDistintas; }
+    public String getFrase() {
+        return frase;
+    }
+
+    public void setFrase(String frase) {
+        this.frase = frase;
+    }
+
+    public Map<String, Integer> getContagemPalavras() {
+        return contagemPalavras;
+    }
 }
